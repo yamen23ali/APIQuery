@@ -1,0 +1,7 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}This project was made as test for GoEuro
+<#if licenseLast??>
+${licenseLast}
+</#if>
