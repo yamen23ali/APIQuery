@@ -48,17 +48,16 @@ public class APIQueryController {
 
             DataParser parser = new DataParser(response.getBody());
             CSVManager manager = new CSVManager("Data.csv");
-            String[] header = {"ID", "Name" , "Type" , "Latitude","longitude"};
+            String[] header = {"_Type","ID", "Name" , "Type" , "Latitude","longitude"};
+            String[] columns = {"_type", "_id" , "name" , "type","latitude","longitude"};
+
             manager.writeRow(header);
 
             for (int i = 0; i < parser.getDataSize(); i++) {
                 ArrayList<String> row = new ArrayList<String>();
-
-                row.add(parser.getNodeValue(i, "_id"));
-                row.add(parser.getNodeValue(i, "name"));
-                row.add(parser.getNodeValue(i, "type"));
-                row.add(parser.getNodeValue(i, "latitude"));
-                row.add(parser.getNodeValue(i, "longitude"));
+                for (int j = 0; j < columns.length; j++) {
+                    row.add(parser.getNodeValue(i, columns[j]));   
+                }
                 manager.writeRow(row.toArray(new String[row.size()]));
             }
             manager.close();
